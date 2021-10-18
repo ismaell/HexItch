@@ -80,6 +80,8 @@ class Motion():
     DOWN  = curses.KEY_DOWN
     LEFT  = curses.KEY_LEFT
     RIGHT = curses.KEY_RIGHT
+    NEXT_PAGE = curses.KEY_NPAGE
+    PREV_PAGE = curses.KEY_PPAGE
 
 
 class UIMode:
@@ -178,6 +180,8 @@ class HexMode(UIMode):
             Motion.DOWN:  (lambda: self.line_len),
             Motion.LEFT:  (lambda: -1),
             Motion.RIGHT: (lambda: 1),
+            Motion.PREV_PAGE: (lambda: -context.term_height * self.line_len),
+            Motion.NEXT_PAGE: (lambda: context.term_height * self.line_len),
         }
 
     def draw(self, screen, key):
